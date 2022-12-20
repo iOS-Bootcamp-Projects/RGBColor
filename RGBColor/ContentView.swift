@@ -11,13 +11,21 @@ struct ContentView: View {
     @State private var redValue: Double = 0
     @State private var greenValue: Double = 0
     @State private var blueValue: Double = 0
+    @State private var redText: String = "Red:"
+    @State private var greenText: String = "Green:"
+    @State private var blueText: String = "Blue:"
+    @State private var colorRed: Color = Color.red
+    @State private var colorBlue: Color = Color.blue
+    @State private var colorGreen: Color = Color.green
+    
+    
     var body: some View {
         VStack {
             
-            redView
-            greenView
-            blueView
-                  
+            CustomColorSlider(sliderValue: $redValue, colorName: $redText,color: $colorRed)
+            CustomColorSlider(sliderValue: $greenValue, colorName: $greenText,color: $colorGreen)
+            CustomColorSlider(sliderValue: $blueValue, colorName: $blueText,color: $colorBlue)
+            
             Text("Result:")
                 Rectangle()
                     .fill(Color(red: redValue, green: greenValue, blue: blueValue))
@@ -27,39 +35,27 @@ struct ContentView: View {
         }.padding()
     }
     
-    var redView: some View {
-        VStack{
-            
-            Text("Red:")
-            Slider(value: $redValue,in: 0...1)
-                .tint(Color(red: redValue, green: 0, blue: 0))
-                
-        }.padding()
-    } // end redView
-    
-    var greenView: some View{
-        VStack{
-            
-            Text("Green:")
-            Slider(value: $greenValue,in: 0...1)
-                    .tint(Color(red: 0, green: greenValue, blue: 0))
-            
-        }.padding()
-    }// end greenView
-    
-    var blueView: some View{
-        VStack{
-            
-            Text("Blue:")
-            Slider(value: $blueValue,in: 0...1)
-                .tint(Color(red: 0, green: 0, blue: blueValue))
-                
-        }.padding()
-    }// end blueView
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+struct CustomColorSlider: View {
+    
+    @Binding  var sliderValue: Double
+    @Binding  var colorName: String
+    @Binding var color:Color
+    
+    var body: some View {
+      
+            VStack{
+                Text("\(colorName)")
+                Slider(value: $sliderValue,in: 0...1)
+                    .tint(color)
+            }.padding()
+        
     }
 }
