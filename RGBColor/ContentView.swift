@@ -32,8 +32,8 @@ struct ContentView: View {
             
             Text("Red:")
             Slider(value: $redValue,in: 0...1)
-                .tint(Color.red)
-            
+                .tint(Color(red: redValue, green: 0, blue: 0))
+                
         }.padding()
     } // end redView
     
@@ -42,7 +42,7 @@ struct ContentView: View {
             
             Text("Green:")
             Slider(value: $greenValue,in: 0...1)
-                    .tint(Color.green)
+                    .tint(Color(red: 0, green: greenValue, blue: 0))
             
         }.padding()
     }// end greenView
@@ -52,8 +52,8 @@ struct ContentView: View {
             
             Text("Blue:")
             Slider(value: $blueValue,in: 0...1)
-                .tint(Color.blue)
-            
+                .tint(Color(red: 0, green: 0, blue: blueValue))
+                
         }.padding()
     }// end blueView
 }
